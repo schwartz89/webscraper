@@ -1,0 +1,9 @@
+#guides
+https://first-web-scraper.readthedocs.io/en/latest/
+https://hackernoon.com/building-a-web-scraper-from-start-to-finish-bb6b95388184
+
+
+https://www.courts.act.gov.au/magistrates/lists?collection=magistrates-court-lawlists&mode=rest-js&f.Hearing+date%7Cd=d%3E03Apr2020%3C04May2020+%3A%3A+Coming+month
+# can easily change date ranges in here
+# table data location is : table id="search-results" class="table table-bordered table-striped"
+# located html > body > #content > div > main > div > div > #search-outer-wrapper > #search-inner-wrapper.results-full-width > #search-results
