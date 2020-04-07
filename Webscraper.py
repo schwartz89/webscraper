@@ -7,13 +7,22 @@ html = wholesite.content
 
 #pull the data into beautifulsoup which reads website data better then display it formatted nicely using the prettify function
 soup = BeautifulSoup(html, 'html.parser')
-#print(soup.prettify())
 table = soup.find('table', id="search-results")
 
-print(table.prettify())
+#what does this do?
+#it iterates through every occasion of the word 'tr' (which is html for 'row' and on each occasion of 'tr' it runs an operation:
+#this operation is to loop through all the 'td' (html for 'individual cell') within the row and prints the text only.
+#so in short this section grabs every individual cell and prints the writing within, cutting out all the html code, while keeping the order of the data.
+# these must be beautifulsoup functions because they seem to intuit that tr is a row, not a single piece of data
+for row in table.findAll('tr'):
+    for cell in row.findAll('td'): #then this does the same for the 'td' which is html for 'individual cell'
+        print(cell.text)
 
 
 # table data location is : table id="search-results" class="table table-bordered table-striped"
 
 #table = soup.find('tbody', attrs={'class': 'stripe'})
 #print table.prettify()
+
+#to do:
+#check if this is truncating any data, I'm not convinced it is getting all dates
