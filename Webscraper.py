@@ -8,7 +8,7 @@ html = wholesite.content
 #pull the data into beautifulsoup which reads website data better then display it formatted nicely using the prettify function
 soup = BeautifulSoup(html, 'html.parser')
 #print(soup.prettify())
-table = soup.find(  ) #HERE wrong
+table = soup.find('table', id="search-results")
 
 print(table.prettify())
 
