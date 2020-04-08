@@ -2,7 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
-url = 'https://www.courts.act.gov.au/magistrates/lists?collection=magistrates-court-lawlists&mode=rest-js&f.Hearing+date%7Cd=d%3E09Apr2020%3C04May2020+%3A%3A+Coming+month'
+#to extend table length add ?num_ranks=9999
+url = 'https://www.courts.act.gov.au/magistrates/lists?num_ranks=9999'
 wholesite = requests.get(url, headers= {'User-Agent': 'Mozilla/5.0'})
 html = wholesite.content
 
@@ -25,7 +26,9 @@ for row in table.findAll('tr'):
 #print to file (.csv). Using csv module
 new_file = open("./CourtList.csv","w",newline='')
 writer = csv.writer(new_file)
+writer.writerow(["Case Number", "Name", "Hearing Date"]) # manually inserting headings instead of looping through thead
 writer.writerows(list_of_rows)
+
 
 
 
@@ -38,5 +41,6 @@ writer.writerows(list_of_rows)
 #table = soup.find('tbody', attrs={'class': 'stripe'})
 #print table.prettify()
 
-#to do:
-#check if this is truncating any data, I'm not convinced it is getting all dates
+# to do:
+# add function to modify dates via function input
+# or modify URL so it always points to a table of all upcoming dates
