@@ -23,7 +23,7 @@ for row in table.findAll('tr'):
     list_of_rows.append(list_of_cells)
         #print(cell.text)
 #print to file (.csv). Using csv module
-new_file = open("./CourtList.csv","w")
+new_file = open("./CourtList.csv","w",newline='')
 writer = csv.writer(new_file)
 writer.writerows(list_of_rows)
 
