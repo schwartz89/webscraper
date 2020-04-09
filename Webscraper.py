@@ -49,7 +49,7 @@ writer.writerows(list_of_rows)
 print("The original list is : " + str(list_of_rows))
 
 # initializing substring
-client_list = 'SCOTT DOUGLAS ARMSTRONG'
+client_list = 'ARMSTRONG' #ONLY WORKS IF NAME IS FULL >:(
 
 # using list comprehension
 # to get string with substring
