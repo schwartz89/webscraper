@@ -16,6 +16,7 @@ table = soup.find('table', id="search-results")
 #this operation is to loop through all the 'td' (html for 'individual cell') within the row and prints the text only.
 #so in short this section grabs every individual cell and prints the writing within, cutting out all the html code, while keeping the order of the data.
 # these must be beautifulsoup functions because they seem to intuit that tr is a row, not a single piece of data
+# think of this loop function like running your finger along reading text in a book. You iterate down line by line, but across each word (cell) in the line.
 list_of_rows = []
 for row in table.findAll('tr'):
     list_of_cells = [] #blank python data list
@@ -30,17 +31,36 @@ writer.writerow(["Case Number", "Name", "Hearing Date"]) # manually inserting he
 writer.writerows(list_of_rows)
 
 
+#CHAPTER II: the nae finder
+# compare our list of clients to the table.
+# could be done directly from html soup with list_of_rows.findAll() or soup.finaAll
+# or using python functions to search list_of_rows
+#x = table.findAll("SCOTT DOUGLAS ARMSTRONG")
+#print(x)
+
+# client_list = ['SCOTT DOUGLAS ARMSTRONG','SMITH', 'ALBATROSS']
+# if any(word in client_list for word in list_of_rows):
+#     print('found one of em')
+#none are working. I think because it is not a list, but rather a list of lists. So it is trying to match the provided string to a whole row, not a cell.
 
 
 
+# printing original list
+print("The original list is : " + str(list_of_rows))
+
+# initializing substring
+client_list = 'SCOTT DOUGLAS ARMSTRONG'
+
+# using list comprehension
+# to get string with substring
+matches = [i for i in list_of_rows if client_list in i]
+
+# printing result
+print("Matches are : " + str(matches))
 
 
 
-# table data location is : table id="search-results" class="table table-bordered table-striped"
-
-#table = soup.find('tbody', attrs={'class': 'stripe'})
-#print table.prettify()
 
 # to do:
-# add function to modify dates via function input
-# or modify URL so it always points to a table of all upcoming dates
+# add list-compare functionality to compare list of clients to court lists. csv - csv compare? then display entire row of matched name
+# add supreme court functionality
