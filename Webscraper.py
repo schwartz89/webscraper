@@ -19,26 +19,37 @@ table = soup.find('table', id="search-results")
 #so in short this section grabs every individual cell and prints the writing within, cutting out all the html code, while keeping the order of the data.
 # these must be beautifulsoup functions because they seem to intuit that tr is a row, not a single piece of data
 # think of this loop function like running your finger along reading text in a book. You iterate down line by line, but across each word (cell) in the line.
-list_of_rows = []
+courtlist_data = []
 for row in table.findAll('tr'):
     list_of_cells = [] #blank python data list
     for cell in row.findAll('td'): #then this does the same for the 'td' which is html for 'individual cell'
         list_of_cells.append(cell.text)
-    list_of_rows.append(list_of_cells)
+    courtlist_data.append(list_of_cells)
         #print(cell.text)
 #print to file (.csv). Using csv module
 new_file = open("./CourtList.csv","w",newline='')
 writer = csv.writer(new_file)
 writer.writerow(["Case Number", "Name", "Hearing Date"]) # manually inserting headings instead of looping through thead
-writer.writerows(list_of_rows)
+writer.writerows(courtlist_data)
 
 
 #CHAPTER II: the nae finder
+#this builds a list of matches by iterating through the web text list and putting the item into the new list when it CONTAINS the keyword.
+# the item put in the list is the entire row. At present this function doesn't know how to search in each cell and so can't match partial keywords yet
+print("The original list is : " + str(courtlist_data))
+client_list = 'Suppressed'
+matches = [i for i in courtlist_data if client_list in i] #needs an extra 'in' iteration? # can I add at the end "or in subdivision of ame" which is to say "is it in the room or is it in the cupboard in the room??
+# ^ so this says: look through the courtlist data item (i) by item (rows), if your client list name is in that item, put that item (the row) in this list.
+# note it is only working for single string client_list keywords too, not a list. This is because it is comparing the whole list to a whole row, not iterating through the client list
 
-print("The original list is : " + str(list_of_rows))
-client_list = 'ADAM NEWMAN'
-matches = [i for i in list_of_rows if client_list in i]
 print("Matches are : " + str(matches))
+
+
+#need to learn 'for' command in python better
+
+# ["foo" in a for a in ["fo", "o", "foobar"]]
+# [False, False, True]
+# Caveat. Lists are iterables, and the in method acts on iterables, not just strings
 
 #none are working. I think because it is not a list, but rather a list of lists. So it is trying to match the provided string to a whole row, not a cell.
 #so i think i need to iterate along the row, not just through. So needs another nested loop like above
