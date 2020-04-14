@@ -41,11 +41,15 @@ client_list = 'Suppressed'
 matches = [i for i in courtlist_data if client_list in i] #needs an extra 'in' iteration? # can I add at the end "or in subdivision of ame" which is to say "is it in the room or is it in the cupboard in the room??
 # ^ so this says: look through the courtlist data item (i) by item (rows), if your client list name is in that item, put that item (the row) in this list.
 # note it is only working for single string client_list keywords too, not a list. This is because it is comparing the whole list to a whole row, not iterating through the client list
-
+# what you need is a NESTED FOR LOOP (see tab)
 print("Matches are : " + str(matches))
 
 
-#need to learn 'for' command in python better
+#NESTED FOR LOOP
+# for i in range(1,6):
+#         for j in range(i):
+#             print("*",end=' ')
+#         print()
 
 # ["foo" in a for a in ["fo", "o", "foobar"]]
 # [False, False, True]

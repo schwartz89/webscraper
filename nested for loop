@@ -1,0 +1,14 @@
+https://data-flair.training/blogs/python-loop/
+
+4. Nested for Loops Python
+You can also nest a loop inside another. You can put a for loop inside a while, or a while inside a for, or a for inside a for, or a while inside a while. Or you can put a loop inside a loop inside a loop. You can go as far as you want.
+
+>>> for i in range(1,6):
+        for j in range(i):
+            print("*",end=' ')
+        print()
+*
+* *
+* * *
+* * * *
+* * * * *
