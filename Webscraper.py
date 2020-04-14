@@ -34,26 +34,20 @@ writer.writerows(list_of_rows)
 
 
 #CHAPTER II: the nae finder
-# compare our list of clients to the table.
-# could be done directly from html soup with list_of_rows.findAll() or soup.finaAll
-# or using python functions to search list_of_rows
-#x = table.findAll("SCOTT DOUGLAS ARMSTRONG")
-#print(x)
-
-# client_list = ['SCOTT DOUGLAS ARMSTRONG','SMITH', 'ALBATROSS']
-# if any(word in client_list for word in list_of_rows):
-#     print('found one of em')
-
-
-
 
 print("The original list is : " + str(list_of_rows))
-client_list = 'SCOTT DOUGLAS ARMSTRONG'
+client_list = 'ADAM NEWMAN'
 matches = [i for i in list_of_rows if client_list in i]
 print("Matches are : " + str(matches))
 
 #none are working. I think because it is not a list, but rather a list of lists. So it is trying to match the provided string to a whole row, not a cell.
 #so i think i need to iterate along the row, not just through. So needs another nested loop like above
+
+# experiment
+# for hay in haystack:
+#   if needle in hay:
+#     return hay
+
 
 
 # to do:
