@@ -1,4 +1,5 @@
 # can I install packages from a python script?
+from typing import Tuple
 
 import requests
 from bs4 import BeautifulSoup
@@ -36,15 +37,22 @@ writer.writerows(courtlist_data)
 # this builds a list of matches by iterating through the web text list and putting the item into the new list when it CONTAINS the keyword.
 # the item put in the list is the entire row. At present this function doesn't know how to search in each cell and so can't match partial keywords yet
 print("The original list is : " + str(courtlist_data))
-client_list = 'JERMAINE'
+client_list = 'MANSOUR'
 
 # matches = [i for i in courtlist_data if client_list in i]
 matches = [row for row in courtlist_data if client_list in row]
 # submatches =
+
 for row in courtlist_data:
     for cell in row:
-        if client_list in cell:
-            print(row)  # change this last line to 'add to matches'
+    #if any([item in client_list for item in row]):
+        if client_list in cell: #need to reword this so it says if any x in y, because we are potentially comparing a larger list to a smaller one, as opposed to our previous 'in' functions
+            matches.append(row)
+           #could add "unless it's already there" to prevent double-up #for some reason this line makes 'matches are : [[]] instead of []
+
+https://stackoverflow.com/questions/6105777/how-to-compare-a-list-of-lists-sets-in-python
+# any([x in "foof" for x in ["bar", "foo", "foobar"]])
+# set(a).intersection(b)
 
 # needs an extra 'in' iteration? # can I add at the end "or in subdivision of ame" which is to say "is it in the room or is it in the cupboard in the room??
 # ^ so this says: look through the courtlist data item (i) by item (rows), if your client list name is in that item, put that item (the row) in this list.
@@ -52,29 +60,18 @@ for row in courtlist_data:
 # what you need is a NESTED FOR LOOP (see tab)
 print("Matches are : " + str(matches))
 
-# ctrl q is doc
 
-# NESTED FOR LOOP
-# for i in range(1,6):
-#         for j in range(i):
-#             print("*",end=' ')
-#         print()
-
-# ["foo" in a for a in ["fo", "o", "foobar"]]
-# [False, False, True]
-# Caveat. Lists are iterables, and the in method acts on iterables, not just strings
 
 # none are working. I think because it is not a list, but rather a list of lists. So it is trying to match the provided string to a whole row, not a cell.
 # so i think i need to iterate along the row, not just through. So needs another nested loop like above
 
-# experiment
-# for hay in haystack:
-#   if needle in hay:
-#     return hay
+# an alternate way of doing this compare would be get both client list and court list in csv form and do a delta compare, keep only matches. Probably no simpler, same issues.
 
 
 # to do:
 # add list-compare functionality to compare list of clients to court lists. csv - csv compare? then display entire row of matched name
+# add list-input functionality. Only working with single strings
 # add supreme court functionality
-# get the script to install its dependencies
+# get the script to install its dependencies ?Pip
 # get it to output somewhere useful
+# find out how to make it run on another pc. USB .exe?, terminal? (see resources)

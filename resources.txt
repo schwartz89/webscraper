@@ -1,6 +1,7 @@
 #guides
 https://first-web-scraper.readthedocs.io/en/latest/
 https://hackernoon.com/building-a-web-scraper-from-start-to-finish-bb6b95388184
+convert py to exe: https://www.youtube.com/watch?v=lOIJIk_maO4
 
 
 https://www.courts.act.gov.au/magistrates/lists?collection=magistrates-court-lawlists&mode=rest-js&f.Hearing+date%7Cd=d%3E03Apr2020%3C04May2020+%3A%3A+Coming+month
@@ -8,4 +9,21 @@ https://www.courts.act.gov.au/magistrates/lists?collection=magistrates-court-law
 # table data location is : table id="search-results" class="table table-bordered table-striped"
 # located html > body > #content > div > main > div > div > #search-outer-wrapper > #search-inner-wrapper.results-full-width > #search-results
 
-test
+notes:
+# ctrl q is doc
+
+# NESTED FOR LOOP
+# for i in range(1,6):
+#         for j in range(i):
+#             print("*",end=' ')
+#         print()
+
+# ["foo" in a for a in ["fo", "o", "foobar"]]
+# [False, False, True]
+# Caveat. Lists are iterables, and the in method acts on iterables, not just strings
+
+
+# experiment
+# for hay in haystack:
+#   if needle in hay:
+#     return hay
