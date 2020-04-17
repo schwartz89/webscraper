@@ -37,20 +37,29 @@ writer.writerows(courtlist_data)
 # this builds a list of matches by iterating through the web text list and putting the item into the new list when it CONTAINS the keyword.
 # the item put in the list is the entire row. At present this function doesn't know how to search in each cell and so can't match partial keywords yet
 print("The original list is : " + str(courtlist_data))
-client_list = 'MANSOUR'
+client_list = 'Stewart', 'BELKOM'
 
-# matches = [i for i in courtlist_data if client_list in i]
-matches = [row for row in courtlist_data if client_list in row]
+matches = []
+
+
+# matches = [row for row in courtlist_data if client_list in row]
 # submatches =
 
-for row in courtlist_data:
-    for cell in row:
-    #if any([item in client_list for item in row]):
-        if client_list in cell: #need to reword this so it says if any x in y, because we are potentially comparing a larger list to a smaller one, as opposed to our previous 'in' functions
-            matches.append(row)
-           #could add "unless it's already there" to prevent double-up #for some reason this line makes 'matches are : [[]] instead of []
+def listcompare(client_name, courtdata):
+    for row in courtdata:
+        for cell in row:
+            if client_name in cell:  # need to reword this so it says if any x in y, because we are potentially comparing a larger list to a smaller one, as opposed to our previous 'in' functions
+                matches.append(row)
+        # could add "unless it's already there" to prevent double-up #for some reason this line makes 'matches are : [[]] instead of []
 
-https://stackoverflow.com/questions/6105777/how-to-compare-a-list-of-lists-sets-in-python
+
+# listcompare(client_list, courtlist_data)
+# now you just gotta iterate this function through each item of client list
+
+for name in client_list:
+    listcompare(name, courtlist_data)
+
+# https://stackoverflow.com/questions/6105777/how-to-compare-a-list-of-lists-sets-in-python
 # any([x in "foof" for x in ["bar", "foo", "foobar"]])
 # set(a).intersection(b)
 
@@ -60,18 +69,13 @@ https://stackoverflow.com/questions/6105777/how-to-compare-a-list-of-lists-sets-
 # what you need is a NESTED FOR LOOP (see tab)
 print("Matches are : " + str(matches))
 
-
-
 # none are working. I think because it is not a list, but rather a list of lists. So it is trying to match the provided string to a whole row, not a cell.
 # so i think i need to iterate along the row, not just through. So needs another nested loop like above
 
 # an alternate way of doing this compare would be get both client list and court list in csv form and do a delta compare, keep only matches. Probably no simpler, same issues.
 
 
-# to do:
-# add list-compare functionality to compare list of clients to court lists. csv - csv compare? then display entire row of matched name
-# add list-input functionality. Only working with single strings
-# add supreme court functionality
-# get the script to install its dependencies ?Pip
-# get it to output somewhere useful
-# find out how to make it run on another pc. USB .exe?, terminal? (see resources)
+# TODO add supreme court functionality
+# TODO get the script to install its dependencies ?Pip
+# TODO get it to output somewhere useful
+# TODO find out how to make it run on another pc. USB .exe?, terminal? (see resources)
