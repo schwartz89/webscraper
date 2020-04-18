@@ -28,6 +28,7 @@ for row in table.findAll('tr'):
     courtlist_data.append(list_of_cells)
 
 ## print to .csv using csv module
+# #redundant
 new_file = open("./CourtList.csv", "w", newline='')
 writer = csv.writer(new_file)
 writer.writerow(["Case Number", "Name", "Hearing Date"])  # manually inserting headings instead of looping through 'thead' in the html
@@ -50,10 +51,17 @@ def listcompare(client_name, courtdata):
 for name in client_list:
     listcompare(name, courtlist_data)
 
-print("The original list is : " + str(courtlist_data))
-print("Matches are : " + str(matches))
+print("You searched for the names: " + str(client_list))
+print("The court list is : " + str(courtlist_data))
+print("The matches are : " + str(matches))
 
+#Write match results to csv
+new_file = open("./Matches.csv", "w", newline='')
+writer = csv.writer(new_file)
+writer.writerow(["You searched for the names: " + str(client_list)])
+writer.writerow(["The matches are:"])
+writer.writerow(["Case Number", "Name", "Hearing Date"])
+writer.writerows(matches)
+
+# TODO find out how to make it run on another pc. USB .exe? (see resources x 2)
 # TODO add supreme court functionality (scoop data from supreme court url then append it on to the dataset)
-# TODO get it to output somewhere useful (terminal? csv?)
-# TODO find out how to make it run on another pc. USB .exe? (see resources)
-# TODO merge this branch into master and go back to master

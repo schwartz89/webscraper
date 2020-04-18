@@ -27,3 +27,10 @@ notes:
 # for hay in haystack:
 #   if needle in hay:
 #     return hay
+
+## making .exe
+After writing a Python script or program you can use PyInstaller
+pip install pyinstaller
+And then do the following to create an exe file that should run without the need of having Python installed on the target PC
+pyinstaller --onefile program.py
+the ‘—onefile’ parameter is used to put all the needed files and libraries into a single executable file. It is important that you look at creating a virtual environment to manage your project packages.
