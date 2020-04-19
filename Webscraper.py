@@ -1,4 +1,5 @@
 # TODO can I install dependencies from a python script? ?PIP ?Exe builder (rolls in all dependencies)
+# TODO find out how to make it run on another pc. USB .exe? (see resources x 2)
 
 #package imports
 import requests
@@ -41,8 +42,6 @@ for row in SC_table.findAll('tr'):
         list_of_cells.append(cell.text)
     courtlist_data.append(list_of_cells)
 
-
-
 ## print to .csv using csv module
 # #redundant
 #new_file = open("./CourtList.csv", "w", newline='')
@@ -54,7 +53,13 @@ for row in SC_table.findAll('tr'):
 ## builds a list of matches
 # by iterating through the web text list and putting the item into a list of matches when it contains the client name.
 
-client_list = 'Barry','gary'
+#input or import client names
+client_list = [] #'Barry','gary'
+file_loc = "./Clients.csv"
+with open(file_loc, 'rt') as f:
+  data = csv.reader(f)
+  for row in data:
+        client_list.append(row)
 
 #TODO have it read from csv # ?should I turn this whole thing into a function so you can input client list name into terminal?
 
@@ -71,7 +76,7 @@ if isinstance(client_list, str):
     client_list = [client_list]
 # runs individual names through our listcompare function
 for name in client_list:
-    listcompare(name, courtlist_data)
+    listcompare(name, courtlist_data)#FIXME depth issues remaining error with trying to casefold a list
 
 print("You searched for the names: " + str(client_list))
 print("The court list is : " + str(courtlist_data))
@@ -85,5 +90,5 @@ writer.writerow(["The matches are:"])
 writer.writerow(["Case Number", "Name", "Hearing Date"])
 writer.writerows(matches)
 
-# TODO find out how to make it run on another pc. USB .exe? (see resources x 2)
+
 
