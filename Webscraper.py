@@ -54,7 +54,8 @@ for row in SC_table.findAll('tr'):
 ## builds a list of matches
 # by iterating through the web text list and putting the item into a list of matches when it contains the client name.
 
-client_list = 'Barry', 'harry'
+client_list = 'Barry','gary'
+
 #TODO have it read from csv # ?should I turn this whole thing into a function so you can input client list name into terminal?
 
 matches = []
@@ -65,19 +66,10 @@ def listcompare(client_name, courtdata):
             if client_name.casefold() in cell.casefold():
                 matches.append(row)
 
-
-
-#FIXME a bug where if client_list is only one name (as opposed to a list of names) then it iterates through by letter - matching every letter.
-# some options to fix:
-# 1) create a conditional (if string do listcompare, if list do iterate through listcompare)
-# 2) force a single string to be put into a list. append onto a blank []?
-#maybe:
-# if isinstance(x,str):
-#     x = [x]
-# print("it doesn't matter what datatype it is now. It is this many names:")
-# for i in x:
-#     print('*')
-
+# converts any solo string to list so all input we get will be a list, easier to iterate through
+if isinstance(client_list, str):
+    client_list = [client_list]
+# runs individual names through our listcompare function
 for name in client_list:
     listcompare(name, courtlist_data)
 
