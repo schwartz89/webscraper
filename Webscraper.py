@@ -23,10 +23,6 @@ MC_table = MC_soup.find('table', id="search-results")
 SC_soup = BeautifulSoup(SC_html, 'html.parser')
 SC_table = SC_soup.find('table', id="search-results")
 
-
-# TODO add supreme court functionality. Either append SC data onto 'table' or onto 'courtlist_data'
-
-
 ## Get the text from the table
 # this iterates through the table rows then cells (tr means table row in html, td means individual cell)
 # think of this loop function like running your finger along reading text in a book. You iterate down line by line, but across each word (cell) in the line.
@@ -75,6 +71,12 @@ def listcompare(client_name, courtdata):
 # some options to fix:
 # 1) create a conditional (if string do listcompare, if list do iterate through listcompare)
 # 2) force a single string to be put into a list. append onto a blank []?
+#maybe:
+# if isinstance(x,str):
+#     x = [x]
+# print("it doesn't matter what datatype it is now. It is this many names:")
+# for i in x:
+#     print('*')
 
 for name in client_list:
     listcompare(name, courtlist_data)
