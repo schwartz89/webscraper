@@ -1,5 +1,6 @@
 # TODO can I install dependencies from a python script? ?PIP ?Exe builder (rolls in all dependencies)
 # TODO find out how to make it run on another pc. USB .exe? (see resources x 2)
+# TODO does this script work for two word name inputs?
 
 #package imports
 import requests
@@ -65,18 +66,24 @@ with open(file_loc, 'rt') as f:
 
 matches = []
 
+
+# converts any solo string to list so all input we get will be a list, easier to iterate through
+if isinstance(client_list, str):
+    client_list = [client_list]
+
 def listcompare(client_name, courtdata):
     for row in courtdata:
         for cell in row:
             if client_name.casefold() in cell.casefold():
                 matches.append(row)
 
-# converts any solo string to list so all input we get will be a list, easier to iterate through
-if isinstance(client_list, str):
-    client_list = [client_list]
+
 # runs individual names through our listcompare function
-for name in client_list:
-    listcompare(name, courtlist_data)#FIXME depth issues remaining error with trying to casefold a list
+for unit in client_list:
+    for name in unit: #FIXME #added this to try to fix depth issue. Nope. ?add conditional ?steal idea from bs4 code
+        listcompare(name, courtlist_data)#FIXME depth issues remaining error with trying to casefold a list
+
+
 
 print("You searched for the names: " + str(client_list))
 print("The court list is : " + str(courtlist_data))
@@ -90,5 +97,7 @@ writer.writerow(["The matches are:"])
 writer.writerow(["Case Number", "Name", "Hearing Date"])
 writer.writerows(matches)
 
-
+#TODO optional. Add user GUI to select client list file like this:
+# from tkinter.filedialog import askopenfilename
+# filename = askopenfilename()
 
