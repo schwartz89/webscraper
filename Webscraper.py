@@ -89,7 +89,6 @@ def flatten(input):
 
 client_list = flatten(client_list)
 
-
 def listcompare(client_name, courtdata):
     for row in courtdata:
         for cell in row:
