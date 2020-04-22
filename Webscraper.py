@@ -55,12 +55,17 @@ for row in SC_table.findAll('tr'):
 # by iterating through the web text list and putting the item into a list of matches when it contains the client name.
 
 #input or import client names
-client_list = [] #'Barry','gary'
-file_loc = "./Clients.csv"
-with open(file_loc, 'rt') as f:
-  data = csv.reader(f)
-  for row in data:
-        client_list.append(row)
+client_list = ['gary', 'harry']
+
+list = [[blah, namee],[sf, sdfsd]]
+
+#flattening
+
+# file_loc = "./Clients.csv"
+# with open(file_loc, 'rt') as f:
+#   data = csv.reader(f)
+#   for row in data:
+#         client_list.append(row)
 
 #TODO have it read from csv # ?should I turn this whole thing into a function so you can input client list name into terminal?
 
@@ -71,6 +76,15 @@ matches = []
 if isinstance(client_list, str):
     client_list = [client_list]
 
+#extend vs append. Append adds it as a sublist
+# def flatten(input):
+#   return_list = []
+#   for item in input:
+#     if isinstance(item, list):
+#       return_list.extend(flatten(item))
+#       else return_list.append(item)
+#   return return_list
+
 def listcompare(client_name, courtdata):
     for row in courtdata:
         for cell in row:
@@ -79,8 +93,9 @@ def listcompare(client_name, courtdata):
 
 
 # runs individual names through our listcompare function
-for unit in client_list:
-    for name in unit: #FIXME #added this to try to fix depth issue. Nope. ?add conditional ?steal idea from bs4 code
+print(type(client_list))
+for name in client_list:
+    # for name in unit: #FIXME #added this to try to fix depth issue. Nope. ?add conditional ?steal idea from bs4 code
         listcompare(name, courtlist_data)#FIXME depth issues remaining error with trying to casefold a list
 
 
