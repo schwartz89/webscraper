@@ -1,6 +1,6 @@
-# TODO can I install dependencies from a python script? ?PIP ?Exe builder (rolls in all dependencies)
 # TODO find out how to make it run on another pc. USB .exe? (see resources x 2)
-# TODO does this script work for two word name inputs?
+# TODO make script work for two word name inputs? # either by forcing input client list to seperate surname, or by having matching function loop through words within a string.
+
 
 #package imports
 import requests
@@ -55,12 +55,11 @@ for row in SC_table.findAll('tr'):
 # by iterating through the web text list and putting the item into a list of matches when it contains the client name.
 
 #input or import client names
-client_list = ['gary', 'harry']
+client_list = 'kristy' #[['harry','mcguckin'],['james','gary']]
 
-list = [[blah, namee],[sf, sdfsd]]
 
-#flattening
 
+## open from csv file
 # file_loc = "./Clients.csv"
 # with open(file_loc, 'rt') as f:
 #   data = csv.reader(f)
@@ -74,16 +73,22 @@ matches = []
 
 # converts any solo string to list so all input we get will be a list, easier to iterate through
 if isinstance(client_list, str):
-    client_list = [client_list]
+     client_list = [client_list]
 
-#extend vs append. Append adds it as a sublist
-# def flatten(input):
-#   return_list = []
-#   for item in input:
-#     if isinstance(item, list):
-#       return_list.extend(flatten(item))
-#       else return_list.append(item)
-#   return return_list
+#extend vs append. Append adds it as a sublist extend tacks it onto the list
+
+#flattens list od lists into normal lists
+def flatten(input):
+  output_list = []
+  for item in input:
+    if isinstance(item, list):
+      output_list.extend(flatten(item))
+    else: output_list.append(item)
+  return output_list
+
+
+client_list = flatten(client_list)
+
 
 def listcompare(client_name, courtdata):
     for row in courtdata:
@@ -93,10 +98,8 @@ def listcompare(client_name, courtdata):
 
 
 # runs individual names through our listcompare function
-print(type(client_list))
 for name in client_list:
-    # for name in unit: #FIXME #added this to try to fix depth issue. Nope. ?add conditional ?steal idea from bs4 code
-        listcompare(name, courtlist_data)#FIXME depth issues remaining error with trying to casefold a list
+        listcompare(name, courtlist_data)
 
 
 
@@ -105,6 +108,7 @@ print("The court list is : " + str(courtlist_data))
 print("The matches are : " + str(matches))
 
 #Write match results to csv
+#todo put cap on file size eg: if len(matches): break print('error too many matches')
 new_file = open("./Matches.csv", "w", newline='')
 writer = csv.writer(new_file)
 writer.writerow(["You searched for the names: " + str(client_list)])
