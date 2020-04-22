@@ -34,3 +34,16 @@ pip install pyinstaller
 And then do the following to create an exe file that should run without the need of having Python installed on the target PC
 pyinstaller --onefile program.py
 the ‘—onefile’ parameter is used to put all the needed files and libraries into a single executable file. It is important that you look at creating a virtual environment to manage your project packages.
+
+#extend vs append. Append adds it as a sublist extend tacks it onto the list
+
+#search by surname and first name by splitting
+The simplest way will just be to check for forename and surname. In your example, you could do:
+search_terms = "Barack Obama"
+matches = []
+for memo_string in memos_list:
+    for word in search_terms.split(" "): #this is the splitter
+        if word not in memo_string:
+            break
+    else:
+        matches.append(memo_string) # triggers when the for loop doesn't break

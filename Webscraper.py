@@ -51,21 +51,18 @@ for row in SC_table.findAll('tr'):
 
 #input or import client names
 client_list = [] #'kristy' #[['harry','mcguckin'],['james','gary']]
-
 # open from csv file
-
-
 file_loc = askopenfilename(title='Select client names list', filetypes=(('csv files','*.csv'),('all files','*.*'))) #"./Clients.csv"
 with open(file_loc, 'rt') as f:
   data = csv.reader(f)
   for row in data:
         client_list.append(row)
+#todo (optional) add dialog box where you can either A. select file from pc B. input name manually
 
+## tidying up the input
 # converts any solo string to list so all input we get will be a list, easier to iterate through
 if isinstance(client_list, str):
      client_list = [client_list]
-
-#extend vs append. Append adds it as a sublist extend tacks it onto the list
 
 #flattens list od lists into normal lists
 def flatten(input):
@@ -76,15 +73,14 @@ def flatten(input):
     else: output_list.append(item)
   return output_list
 
-
 client_list = flatten(client_list)
 
+##comparing client list to court list
 def listcompare(client_name, courtdata):
     for row in courtdata:
         for cell in row:
             if client_name.casefold() in cell.casefold():
                 matches.append(row)
-
 
 # runs individual names through our listcompare function
 matches = []
@@ -92,7 +88,7 @@ for name in client_list:
         listcompare(name, courtlist_data)
 
 
-
+### Chapter III: Output
 print("You searched for the names: " + str(client_list))
 print("The court list is : " + str(courtlist_data))
 print("The matches are : " + str(matches))
@@ -106,7 +102,7 @@ writer.writerow(["The matches are:"])
 writer.writerow(["Case Number", "Name", "Hearing Date"])
 writer.writerows(matches)
 
-#TODO optional. Add user GUI to select client list file like this:
-# from tkinter.filedialog import askopenfilename
-# filename = askopenfilename()
+#todo (optional) add popup saying results printed to csv here. click to open
+# todo (optional) print match results deliniated by search term ie: Kristy matched with:, James matched with:
+# useful for searching a whole client list at once
 
