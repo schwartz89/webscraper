@@ -6,6 +6,8 @@
 import requests
 from bs4 import BeautifulSoup
 import csv
+from tkinter.filedialog import askopenfilename
+
 
 ### CHAPTER I: Getting the website data
 
@@ -43,33 +45,21 @@ for row in SC_table.findAll('tr'):
         list_of_cells.append(cell.text)
     courtlist_data.append(list_of_cells)
 
-## print to .csv using csv module
-# #redundant
-#new_file = open("./CourtList.csv", "w", newline='')
-#writer = csv.writer(new_file)
-#writer.writerow(["Case Number", "Name", "Hearing Date"])  # manually inserting headings instead of looping through 'thead' in the html
-#writer.writerows(courtlist_data)
-
 ### CHAPTER II: the name finder
 ## builds a list of matches
 # by iterating through the web text list and putting the item into a list of matches when it contains the client name.
 
 #input or import client names
-client_list = 'kristy' #[['harry','mcguckin'],['james','gary']]
+client_list = [] #'kristy' #[['harry','mcguckin'],['james','gary']]
+
+# open from csv file
 
 
-
-## open from csv file
-# file_loc = "./Clients.csv"
-# with open(file_loc, 'rt') as f:
-#   data = csv.reader(f)
-#   for row in data:
-#         client_list.append(row)
-
-#TODO have it read from csv # ?should I turn this whole thing into a function so you can input client list name into terminal?
-
-matches = []
-
+file_loc = askopenfilename(title='Select client names list', filetypes=(('csv files','*.csv'),('all files','*.*'))) #"./Clients.csv"
+with open(file_loc, 'rt') as f:
+  data = csv.reader(f)
+  for row in data:
+        client_list.append(row)
 
 # converts any solo string to list so all input we get will be a list, easier to iterate through
 if isinstance(client_list, str):
@@ -97,6 +87,7 @@ def listcompare(client_name, courtdata):
 
 
 # runs individual names through our listcompare function
+matches = []
 for name in client_list:
         listcompare(name, courtlist_data)
 
