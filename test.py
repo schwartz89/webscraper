@@ -1,16 +1,19 @@
-# import csv
+import csv
 
+list = ["james"]
+big_list = list * 100
+print(big_list)
 
-court_list = ["Barack James Obama", "Roger Ramjet"]
-search_terms = "Barack"
-matches = []
-for name_string in court_list:
-    for word in search_terms.split(" "):
-        if word not in name_string:
-            break
-    else:
-        matches.append(name_string) # triggers when the for loop doesn't break
-print(matches)
+# court_list = ["Barack James Obama", "Roger Ramjet"]
+# search_terms = "Barack"
+# matches = []
+# for name_string in court_list:
+#     for word in search_terms.split(" "):
+#         if word not in name_string:
+#             break
+#     else:
+#         matches.append(name_string) # triggers when the for loop doesn't break
+# print(matches)
 #very close to being the thing! only downside is that a spelling error in fore or surname invalidates the search for that name.
 #i'm sure that is easily fixable
 #or just make sure no spelling errors in input - could be a good options to keep output list small

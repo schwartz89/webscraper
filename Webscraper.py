@@ -1,6 +1,5 @@
 # TODO find out how to make it run on another pc. USB .exe? (see resources x 2)
 
-
 #package imports
 import requests
 from bs4 import BeautifulSoup
@@ -48,7 +47,7 @@ for row in SC_table.findAll('tr'):
 # by iterating through the web text list and putting the item into a list of matches when it contains the client name.
 
 #input or import client names
-client_list = [] #'kristy' #[['harry','mcguckin'],['james','gary']]
+client_list = []
 # open from csv file
 file_loc = askopenfilename(title='Select client names list', filetypes=(('csv files','*.csv'),('all files','*.*'))) #"./Clients.csv"
 with open(file_loc, 'rt') as f:
@@ -56,6 +55,7 @@ with open(file_loc, 'rt') as f:
   for row in data:
         client_list.append(row)
 #todo (optional) add dialog box where you can either A. select file from pc B. input name manually
+# could also add info box here about type of input accepted
 
 ## tidying up the input
 # converts any solo string to list so all input we get will be a list, easier to iterate through
@@ -72,8 +72,6 @@ def flatten(input):
   return output_list
 
 client_list = flatten(client_list)
-
-#####
 
 def listcompare(client_name, courtdata):
     for row in courtdata:
@@ -95,15 +93,16 @@ print("The court list is : " + str(courtlist_data))
 print("The matches are : " + str(matches))
 
 #Write match results to csv
-#todo put cap on file size eg: if len(matches): break print('error too many matches')
 new_file = open("./Matches.csv", "w", newline='')
 writer = csv.writer(new_file)
-writer.writerow(["You searched for the names: " + str(client_list)])
-writer.writerow(["The matches are:"])
-writer.writerow(["Case Number", "Name", "Hearing Date"])
-writer.writerows(matches)
+if len(matches) > 10000:
+    print('Too many matches, will not export this to file')
+else:
+    writer.writerow(["You searched for the names: " + str(client_list)])
+    writer.writerow(["The matches are:"])
+    writer.writerow(["Case Number", "Name", "Hearing Date"])
+    writer.writerows(matches)
 
 #todo (optional) add popup saying results printed to csv here. click to open
-# todo (optional) print match results deliniated by search term ie: Kristy matched with:, James matched with:
-# useful for searching a whole client list at once
+# todo (optional) print match results deliniated by search term ie: Kristy matched with:, James matched with: useful for searching a whole client list at once
 
