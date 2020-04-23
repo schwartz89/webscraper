@@ -1,4 +1,9 @@
 # TODO find out how to make it run on another pc. USB .exe? (see resources x 2)
+# TODO pyinstaller not finding required packages so exe not working
+# I assume becuase my cmd and powershell terminals can't find requests or bs4 either - so they must be installed
+# in a place they can't see. This happens when i install stuff from the pycharm terminal. This must be instanced
+# so I either need to point pyinstaller to the instance location where the packages live. Or install them all in
+# my pc terminal. Not sure if this is bad practice though
 
 #package imports
 import requests
