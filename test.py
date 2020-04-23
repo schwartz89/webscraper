@@ -2,7 +2,7 @@
 
 
 court_list = ["Barack James Obama", "Roger Ramjet"]
-search_terms = "Barack Obama"
+search_terms = "Barack"
 matches = []
 for name_string in court_list:
     for word in search_terms.split(" "):

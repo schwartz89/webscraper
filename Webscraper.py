@@ -1,5 +1,4 @@
 # TODO find out how to make it run on another pc. USB .exe? (see resources x 2)
-# TODO make script work for two word name inputs? # either by forcing input client list to seperate surname, or by having matching function loop through words within a string.
 
 
 #package imports
@@ -7,7 +6,6 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 from tkinter.filedialog import askopenfilename
-
 
 ### CHAPTER I: Getting the website data
 
@@ -75,18 +73,21 @@ def flatten(input):
 
 client_list = flatten(client_list)
 
-##comparing client list to court list
+#####
+
 def listcompare(client_name, courtdata):
     for row in courtdata:
         for cell in row:
-            if client_name.casefold() in cell.casefold():
-                matches.append(row)
+            for word in client_name.split(" "): #chops the search term name into individual words
+                if word.casefold() not in cell.casefold():
+                    break
+            else:
+                matches.append(row) # triggers when the for loop doesn't break
 
 # runs individual names through our listcompare function
 matches = []
 for name in client_list:
         listcompare(name, courtlist_data)
-
 
 ### Chapter III: Output
 print("You searched for the names: " + str(client_list))
